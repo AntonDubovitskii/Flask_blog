@@ -11,7 +11,7 @@ login_manager.login_view = "auth_app.login"
 
 @login_manager.user_loader
 def load_user(user_id):
-    return User.quary.filter_by(id=user_id).one_or_none()
+    return User.query.filter_by(id=user_id).one_or_none()
 
 
 @login_manager.unauthorized_handler
