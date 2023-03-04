@@ -1,5 +1,6 @@
-from blog.app import create_app, db
 from flask import render_template
+from blog.app import create_app
+from blog.extensions import db
 
 app = create_app()
 
@@ -18,14 +19,18 @@ def init_db():
 @app.cli.command("create-users")
 def create_users():
     from blog.models import User
-    admin = User(username="admin", is_staff=True)
-    sam = User(username="sam")
+    admin = User(username="Admin", is_staff=True)
+    sam = User(username="Sam")
+    jane = User(username="Jane")
+    john = User(username="John")
 
     db.session.add(admin)
     db.session.add(sam)
+    db.session.add(jane)
+    db.session.add(john)
     db.session.commit()
 
-    print("Done! Created users:", admin, sam)
+    print("Done! Created users:", admin, sam, jane, john)
 
 
 @app.cli.command("create-articles")
