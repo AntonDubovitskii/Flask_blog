@@ -1,3 +1,5 @@
+import os
+
 from flask import render_template
 from blog.app import create_app
 from blog.extensions import db
@@ -10,27 +12,16 @@ def start():
     return render_template("index.html")
 
 
-@app.cli.command("init-db")
-def init_db():
-    db.create_all()
-    print("Done!")
-
-
-@app.cli.command("create-users")
-def create_users():
+@app.cli.command("create-admin")
+def create_admin():
     from blog.models import User
     admin = User(username="Admin", is_staff=True)
-    sam = User(username="Sam")
-    jane = User(username="Jane")
-    john = User(username="John")
+    admin.password = os.environ.get("ADMIN_PASSWORD") or "adminpass"
 
     db.session.add(admin)
-    db.session.add(sam)
-    db.session.add(jane)
-    db.session.add(john)
     db.session.commit()
 
-    print("Done! Created users:", admin, sam, jane, john)
+    print("Done! Created admin:", admin)
 
 
 @app.cli.command("create-articles")

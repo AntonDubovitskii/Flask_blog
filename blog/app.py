@@ -3,6 +3,7 @@ import os
 from flask import Flask
 
 from blog.models import User
+from blog.security import flask_bcrypt
 from blog.views.articles import articles_app
 from blog.extensions import db, login_manager, migrate
 
@@ -12,7 +13,7 @@ def create_app() -> Flask:
     register_blueprints(app)
 
     cfg_name = os.environ.get("CONFIG_NAME") or "DevConfig"
-    app.config.from_object(f"blog.configs.{cfg_name}")
+    app.config.from_object(f"blog.configs.BaseConfig")
 
     register_extensions(app)
     register_blueprints(app)
@@ -22,6 +23,7 @@ def create_app() -> Flask:
 def register_extensions(app):
     db.init_app(app)
     migrate.init_app(app, db, compare_type=True)
+    flask_bcrypt.init_app(app)
 
     login_manager.login_view = "auth_app.login"
     login_manager.init_app(app)
