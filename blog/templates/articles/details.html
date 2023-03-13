@@ -5,10 +5,31 @@
 {% endblock %}
 
 {% block body %}
-    <h1>{{ article.title }}</h1>
-    <div>
-        <p>{{ article.body }}</p>
-        <div>Published {{ article.dt_created }}</div>
-        <div>by {{ article.author.user.username }}</div>
+    <div class="row">
+        <h1>{{ article.title }}</h1>
+    </div>
+
+    <div class="row">
+        <div class="col-6">
+            {{ article.body }}
+        </div>
+
+    <div class="row">
+        <div class="col-6">
+            <div><small class="text-muted">by {{ article.author.user.username }}</small></div>
+            <div><small class="text-muted">Published:
+                {{ article.dt_created.strftime('%d-%m-%Y %H:%M:%S') }}</small></div>
+            <div><small class="text-muted">Published:
+                {{ article.dt_updated.strftime('%d-%m-%Y %H:%M:%S') }}</small></div>
+            <div>by {{ article.author.user.username }}</div>
+        </div>
+        <div class="col-6">
+            {% for tag in article.tags %}
+                <span class="badge bg-primary">{{ tag.name }}</span>
+            {% endfor %}
+        </div>
+    </div>
+
+
     </div>
 {% endblock %}

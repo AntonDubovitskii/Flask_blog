@@ -7,6 +7,23 @@ from blog.extensions import db
 app = create_app()
 
 
+@app.cli.command("create-tags")
+def create_tags():
+    from blog.models import Tag
+    for name in [
+        "flask",
+        "django",
+        "python",
+        "sqlalchemy",
+        "news",
+    ]:
+        tag = Tag(name=name)
+        db.session.add(tag)
+    db.session.commit()
+
+    print("Done! Tags created!")
+
+
 @app.route('/', endpoint="index")
 def start():
     return render_template("index.html")
