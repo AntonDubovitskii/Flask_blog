@@ -17,6 +17,12 @@ def articles_list():
     return render_template("articles/list.html", articles=articles)
 
 
+@articles_app.route("/tag/<int:tag_id>/", endpoint="tag")
+def articles_list(tag_id: int):
+    articles = Article.query.filter(Article.tags.any(Tag.id == tag_id))
+    return render_template("articles/list.html", articles=articles)
+
+
 @articles_app.route("/<int:article_id>/", endpoint="details")
 def article_details(article_id: int):
     article = Article.query.filter_by(id=article_id).options(joinedload(Article.tags)).one_or_none()

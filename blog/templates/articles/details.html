@@ -25,11 +25,9 @@
         </div>
         <div class="col-6">
             {% for tag in article.tags %}
-                <span class="badge bg-primary">{{ tag.name }}</span>
+                <span class="badge bg-primary"><a class="text-white" href="{{ url_for('articles_app.tag', tag_id=tag.id) }}">{{ tag.name }}</a></span>
             {% endfor %}
         </div>
     </div>
-
-
     </div>
 {% endblock %}
