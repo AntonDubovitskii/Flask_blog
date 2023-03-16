@@ -2,6 +2,7 @@ import os
 
 from flask import Flask
 
+from blog.admin import admin
 from blog.models import User
 from blog.security import flask_bcrypt
 from blog.views.articles import articles_app
@@ -25,6 +26,7 @@ def register_extensions(app):
     db.init_app(app)
     migrate.init_app(app, db, compare_type=True)
     flask_bcrypt.init_app(app)
+    admin.init_app(app)
 
     login_manager.login_view = "auth_app.login"
     login_manager.init_app(app)
