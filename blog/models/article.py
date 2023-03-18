@@ -23,3 +23,6 @@ class Article(db.Model):
 
     def __repr__(self):
         return f"Article #{self.id} {self.title!r} {self.dt_updated!r}>"
+
+    def __str__(self):
+        return self.title
