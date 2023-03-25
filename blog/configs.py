@@ -6,7 +6,6 @@ class BaseConfig(object):
     TESTING = False
     SQLALCHEMY_DATABASE_URI = "sqlite:///db.sqlite"
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-    SECRET_KEY = "y__v#^)j(x8%pnx&-wn1rw6j2o+=tb86@36z3koc(gq1135z7*"
     WTF_CSRF_ENABLED = True
     FLASK_ADMIN_SWATCH = 'cosmo'
 
@@ -24,3 +23,7 @@ class DevConfig(BaseConfig):
 class TestingConfig(BaseConfig):
     TESTING = True
 
+
+class ProductionConfig(BaseConfig):
+    SQLALCHEMY_DATABASE_URI = "sqlite:///db.sqlite"
+    SECRET_KEY = os.environ.get("SECRET_KEY")

@@ -14,7 +14,7 @@ from blog.extensions import db, login_manager, migrate, api, csrf
 def create_app() -> Flask:
     app = Flask(__name__)
 
-    cfg_name = os.environ.get("CONFIG_NAME") or "BaseConfig"
+    cfg_name = os.environ.get("CONFIG_NAME") or "DevConfig"
     app.config.from_object(f"blog.configs.{cfg_name}")
 
     register_extensions(app)
