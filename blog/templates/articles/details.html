@@ -19,9 +19,8 @@
             <div><small class="text-muted">by {{ article.author.user.username }}</small></div>
             <div><small class="text-muted">Published:
                 {{ article.dt_created.strftime('%d-%m-%Y %H:%M:%S') }}</small></div>
-            <div><small class="text-muted">Published:
+            <div><small class="text-muted">Updated:
                 {{ article.dt_updated.strftime('%d-%m-%Y %H:%M:%S') }}</small></div>
-            <div>by {{ article.author.user.username }}</div>
         </div>
         <div class="col-6">
             {% for tag in article.tags %}
