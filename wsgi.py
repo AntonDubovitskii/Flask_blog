@@ -32,7 +32,7 @@ def start():
 @app.cli.command("create-admin")
 def create_admin():
     from blog.models import User
-    admin = User(username="Admin", is_staff=True)
+    admin = User(username="Admin", is_staff=True, first_name="Anton", last_name="Dubovitskii", email="admin@mail.ru")
     admin.password = os.environ.get("ADMIN_PASSWORD") or "adminpass"
 
     db.session.add(admin)
